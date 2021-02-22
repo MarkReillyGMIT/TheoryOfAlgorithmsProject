@@ -20,6 +20,10 @@ void bin_print(unsigned int i){
 
 // Standard main signiture.
 int main(int argc, char *argv[]){
+
+    printf("%d\n", argc);
+    return 0;
+
     //set i to literal value
     unsigned int i = 0x0f0f0f0f;//1;//0xf1;//241
 
