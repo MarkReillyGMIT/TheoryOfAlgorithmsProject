@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <inttypes.h>
-#define W 64
-#define WORD uint64_t
-#define PF PRIX64
+#define W 32
+#define WORD uint32_t
+#define PF PRIX32
 
 //Creating CH function 
 // Ref: https://crypto.stackexchange.com/questions/5358/what-does-maj-and-ch-mean-in-sha-256-algorithm
