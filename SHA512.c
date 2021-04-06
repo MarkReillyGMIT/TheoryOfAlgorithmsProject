@@ -22,7 +22,7 @@ const int _i = 1;
 //Stands for the majorityfor each bit index, that result bit is according to the majority of
 //the 3 inputs bits for x y and z at this index.
 #define MAJ(_x, _y, _z) ((_x & _y) ^ (_x & _z) ^ (_y & _z))
-#define SIG0(_x) (ROTR(_x, 28) ^ ROTR(_x, 34) ^ ROTR(_x, 29))
+#define SIG0(_x) (ROTR(_x, 28) ^ ROTR(_x, 34) ^ ROTR(_x, 39))
 #define SIG1(_x) (ROTR(_x, 14) ^ ROTR(_x, 18) ^ ROTR(_x, 41))
 #define LSIG0(_x) (ROTR(_x, 1) ^ ROTR(_x, 8) ^ SHR(_x, 7))
 #define LSIG1(_x) (ROTR(_x, 19) ^ ROTR(_x, 61) ^ SHR(_x, 6))
@@ -113,7 +113,7 @@ int next_block(FILE *f, union Block *M, enum Status *S, uint64_t *nobits)
                 M->bytes[nobytes] = 0x00; // In bits: 10000000
             }
             // Append length of original input (CHECK ENDIANESS)
-            M->sixf[14] = (is_lilend() ? bswap_64(*nobits) : *nobits);
+            M->sixf[15] = (is_lilend() ? bswap_64(*nobits) : *nobits);
             //Say this is the last block
             *S = END;
         }
@@ -140,7 +140,7 @@ int next_block(FILE *f, union Block *M, enum Status *S, uint64_t *nobits)
             M->bytes[nobytes] = 0x00; // In bits: 10000000
         }
         //Append nobits as an integer. CHECK ENDIAN
-        M->sixf[14] = (is_lilend() ? bswap_64(*nobits) : *nobits);
+        M->sixf[15] = (is_lilend() ? bswap_64(*nobits) : *nobits);
         // Change the status to END.
         *S = END;
     }
@@ -156,7 +156,7 @@ int next_block(FILE *f, union Block *M, enum Status *S, uint64_t *nobits)
 ///////////////////////////////////////////////////////////////////
 
 //////////////////////////-Hash Computation-///////////////////////
-int next_hash(union Block *M, WORD H[])
+int next_hash(union Block *M, WORD H[]) 
 {
     // Message schedule, Section 6.4.2
     WORD W[80];
@@ -266,7 +266,7 @@ int main(int argc, char *argv[])
     //Print the sha512 hash.
     for (int i = 0; i < 8; i++)
     {
-        printf("%016" PF, H[i]);
+        printf("%08" PF, H[i]);
     }
     printf("\n");
 
