@@ -4,6 +4,13 @@ funcs
 functions
 preprocess
 emptyexec
+args
+SHA512
+sha256i
+sha256
+SHA512.o
+SHA512.s
+a.out
 # Prerequisites
 *.d
 

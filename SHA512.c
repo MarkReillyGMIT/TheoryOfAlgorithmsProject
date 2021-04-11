@@ -17,7 +17,7 @@ const int _i = 1;
 //////////////////////////-Functions-/////////////////////////////
 // Ref: https://crypto.stackexchange.com/questions/5358/what-does-maj-and-ch-mean-in-sha-256-algorithm
 //Ch stands for choose or choice, as the x input chooses if the output is from y or from z.
-//Page 10 of the secure hash Standard
+//Page 11 of the secure hash Standard
 #define CH(_x, _y, _z) ((_x & _y) ^ (~_x & _z))
 //Stands for the majorityfor each bit index, that result bit is according to the majority of
 //the 3 inputs bits for x y and z at this index.
@@ -35,7 +35,7 @@ const int _i = 1;
 #define SHR(_x, _n) ((_x >> _n))
 ///////////////////////////////////////////////////////////////////
 
-//////////////////////////-Constants-//////////////////////////////
+//////////////////////////-Constants-//////////////////////Pg-12///
 const WORD K[] = {
     0x428a2f98d728ae22, 0x7137449123ef65cd, 0xb5c0fbcfec4d3b2f, 0xe9b5dba58189dbbc,
     0x3956c25bf348b538, 0x59f111f1b605d019, 0x923f82a4af194f9b, 0xab1c5ed5da6d8118,
@@ -59,7 +59,7 @@ const WORD K[] = {
     0x4cc5d4becb3e42b6, 0x597f299cfc657e2a, 0x5fcb6fab3ad6faec, 0x6c44198c4a475817};
 ///////////////////////////////////////////////////////////////////
 
-//////////////////////////-Preprocessing-//////////////////////////
+//////////////////////////-Preprocessing-///////////////Pg-14//////
 //SHA-512 works on blocks of 1024 bits.
 union Block
 {
@@ -155,7 +155,7 @@ int next_block(FILE *f, union Block *M, enum Status *S, uint64_t *nobits)
 
 ///////////////////////////////////////////////////////////////////
 
-//////////////////////////-Hash Computation-///////////////////////
+//////////////////////////-Hash Computation-///////////////Pg-24///
 int next_hash(union Block *M, WORD H[]) 
 {
     // Message schedule, Section 6.4.2
@@ -180,8 +180,6 @@ int next_hash(union Block *M, WORD H[])
     f = H[5];
     g = H[6];
     h = H[7];
-
-    //printf("R%d abcdefgh: %08" PF " %016 %016 %016x %016x %016x %016x %016x\n", t, a, b, c, d, e, f, g, h );
 
     // Section 6.4.2 Part 3
     for (t = 0; t < 80; t++)
@@ -250,7 +248,7 @@ int main(int argc, char *argv[])
      *
      **/
 
-    //Section 5.3.3
+    //Section 5.3.5
     WORD H[] = {
         0x6a09e667f3bcc908, 0xbb67ae8584caa73b, 0x3c6ef372fe94f82b, 0xa54ff53a5f1d36f1,
         0x510e527fade682d1, 0x9b05688c2b3e6c1f, 0x1f83d9abfb41bd6b, 0x5be0cd19137e2179};
