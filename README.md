@@ -16,10 +16,10 @@ Source Code for Compilation
 -----------------------------
 - `git clone https://github.com/MarkReillyGMIT/TheoryOfAlgorithmsProject`
 - `cd <compilation directory>`
-- `./SHA512 <file to calculate SHA512 value of>`
+-  Run `make test` this will run tests on any .txt file in the current directory and output sha512 value of the file and compare it to the correct sha512 value using sha512sum.
 
 ## Explanation
-
+#### What the SHA512 algorithm is and why it is important.
 
 ## Questions and Answers:
 #### Why can't we reverse the SHA512 algorithm to retrieve the original message from a hash digest?
