@@ -18,17 +18,18 @@ Source Code for Compilation
 - `cd <compilation directory>`
 -  Run `make test` this will run tests on any .txt file in the current directory and output sha512 value of the file and compare it to the correct sha512 value using sha512sum.
 
+
 ## Explanation
 #### What is the SHA512 algorithm and why it is important.
 
-SHA-512 is a hashing algorithm that performs a hashing function on some data given to it [1]. To understand what the SHA-512 algorithm is we need to firstly understand what a hashing function is. Hashing algorithms generate a fixed length result (the hash value) from a given input. It is a mathematical algorithm that maps data of arbitrary size to a hash of a fixed size. They are designed to be one-way functions, infeasible to invert [2]. 
+SHA-512 is a hashing algorithm that performs a hashing function on some data given to it [1]. To understand what the SHA-512 algorithm is we need to firstly understand what a hashing function is. Hashing algorithms generate a fixed length result (the hash value) from a given input. It is a mathematical algorithm that maps data of arbitrary size to a hash of a fixed size. They are designed to be one-way functions, infeasible to invert [2].
 
 SHA-512 or Secure Hash Algorithm 512 is a hashing algorithm used to convert data into a fixed-size string of 512bits (64bytes). Originally published in 2001, it was developed by the US Government's National Security Agency (NSA) [3]. It is designed with these four stages:
 
-    - Input formatting.
-    - Hash buffer initialization.
-    - Message Processing.
-    - Output.
+- Input formatting.
+- Hash buffer initialization.
+- Message Processing.
+- Output.
 
 ###### Input Formatting
 
@@ -36,11 +37,11 @@ The SHA-512's formatted message has three parts: the original message, padding b
 
 ###### Hash Buffer Initialization
 
-This part of the algorithm works by processing each block of 1024 bits from the message using the result from the previous block. This posed a problem for the first block which does not have a result from a previos block. The solutuion to this was to use an inital hash value consisting of eight 64-bit words. Each result is stored in a hash buffer which in turn stores the final hash digest of the entire processing phase [1].
+This part of the algorithm works by processing each block of 1024 bits from the message using the result from the previous block. This posed a problem for the first block which does not have a result from a previous block. The solution to this was to use an initial hash value consisting of eight 64-bit words. Each result is stored in a hash buffer which in turn stores the final hash digest of the entire processing phase [1].
 
-###### Message Processing 
+###### Message Processing
 
-Message processing is done upon the formatted input by taking one block of 1024 bits a time. The messge block is made into eighty 'Words' each having a size of 64 bits. The main part of the message processing is the Rounds. Each round takes 3 things: One 'Word', the output of the previous round and the SHA-512 constant. After it processes the 3 above items it gives an output of 512 bits, this is then repeated 80 Rounds. After the 80th Round the output is then added to previous message processing phase [1].
+Message processing is done upon the formatted input by taking one block of 1024 bits a time. The message block is made into eighty 'Words', each having a size of 64 bits. The main part of the message processing is the Rounds. Each round takes three things: One 'Word', the output of the previous round and the SHA-512 constant. After it processes the 3 above items it gives an output of 512 bits, this is then repeated 80 Rounds. After the 80th Round the output is then added to previous message processing phase [1].
 
 ###### Output
 
@@ -51,6 +52,17 @@ The SHA-512 serves significant importance in providing security. The algorithm i
 
 ## Questions and Answers:
 #### Why can't we reverse the SHA512 algorithm to retrieve the original message from a hash digest?
+
+The SHA-512 algorithm is a hashing function which is a mathematical algorithm that maps data of arbitrary size (often called the "message") to a bit array of a fixed size (the "hash value", "hash", or "message digest") [4]. It cannot be reversed due to it being a one-way function - a one-way function is a function that is easy to compute on every input, but hard to invert given the image of a random input [5].
+
+In a hash function hundreds of one way operations take place sequentially, using the results from the earlier operation in the next operation. If trying to reverse it you would have to guess the two inputs in the later stage and then work back through the algorithm, but if you guess a number wrong there will be inconsistencies in the next stages. Using trial and error to guess the combinations to get a collision - a collision is when newly inserted key maps to an already occupied slot in a hash table [6] - is computationally expensive as there are to many combinations to guess.
+
+SHA-512 is theoretically possible to reverse, but it is realistically impossible due to how computationally expensive it will be, and the time taken will be much longer than a few million years. SHA-512 is bit dependent which means tha each bit of the output is dependent upon every bit in the input. This prevents anyone from splitting the algorithm up and trying to reverse calculate an input from each bit of the output hash separately [7]. To solve just one output bit, you must know the entire input.
+
+Two features that hashing algorithms use in making them non-reversible are: "The Avalanche Effect" and "Nonlinearity." The avalanche effect which means that a small change in the input results in a significant change in the output, making it statistically indistinguishable from random [8]. Since the output changes so dramatically with each input bit change, this stops anyone from building up relationships between inputs and outputs. Nonlinearity prevents anyone from using algebra techniques to solve the input from a given output. Hashing algorithms use many combinations of linear and non-linear operations.
+
+In conclusion it is realistically impossible to reverse the SHA-512 algorithm to retrieve the original message from the hash digest.
+
 
 #### Can you design an algorithm that, given enough time, will find input messages that give each of the possible 512-bit strings?
 
@@ -67,3 +79,13 @@ The SHA-512 serves significant importance in providing security. The algorithm i
 - [2] Hashing Function: https://blog.jscrambler.com/hashing-algorithms/
 
 - [3] SHA-512 Overview: https://blog.komodoplatform.com/en/sha-512/
+
+- [4] Cryptographic hash function: https://en.wikipedia.org/wiki/Cryptographic_hash_function
+
+- [5] One-way Function: https://en.wikipedia.org/wiki/One-way_function
+
+- [6] Collision Meaning: https://www.geeksforgeeks.org/hashing-set-2-separate-chaining/
+
+- [7] Reversing SHA-512: https://crypto.stackexchange.com/questions/45377/why-cant-we-reverse-hashes#:~:text=Bit%20dependency%3A%20A%20hash%20algorithm,of%20the%20output%20hash%20separately.
+
+- [8] Avalanche Effect: https://www.wolfram.com/language/12/cryptography/demonstrate-the-avalanche-effect-of-a-hash-function.html
