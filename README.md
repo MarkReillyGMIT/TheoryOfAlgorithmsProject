@@ -68,11 +68,17 @@ In conclusion it is realistically impossible to reverse the SHA-512 algorithm to
 
 #### How difficult is it to find a hash digest beginning with at least twelve zeros?
 
-## Research
+There is an increase in difficulty with finding a hash digest beginning with twelve zeros, for every zero thats needed to be at the beginning of a hash digest the difficulty increases as well. The reason behind having twelve or more leading zeros is due to the concept ["Proof of Work"](https://en.wikipedia.org/wiki/Proof_of_work#:~:text=Proof%20of%20work%20(PoW)%20is,minimal%20effort%20on%20their%20part.). Proof of work (PoW) is a form of cryptographic zero-knowledge proof in which one party (the prover) proves to others (the verifiers) that a certain amount of computational effort has been expended for some purpose [9].
 
+Bitcoin is a very good example of proving that there is a high level of difficulty with having a number of leading zeros at the beginning of a hash digest. Bitcoin is a proof-of-work cryptocurrency that is based on the [Hashcash](https://en.wikipedia.org/wiki/Hashcash) PoW.Bitcoin use the SHA-256 hashing function to generate a 64-digit hexadecimal number. Blocks in the blockchain have another field which is called ["The Nonce"](https://www.investopedia.com/terms/n/nonce.asp#:~:text=A%20nonce%20is%20an%20abbreviation,blockchain%20miners%20are%20solving%20for.) which stands for number used only once. The Nonce is an integer number and along with the Block Number, Data and previous hash the Nonce serves as an input to the SHA-256 function to calculate the current block's hash. The nonce is designed to be totally under the user control providing the user with a mechanism to vary the current blocks hash without changing the data inside it.
 
+With bitcoin there is a minimal target for a hash set every two weeks, anything above the target is rejected and anything below the target is accepted. The important part about the target is the amount of leading zeros which represent a fixed-size number that determines its magnitude. Every leading zero reduces the numbers magnitude by a factor of sixteen. For this example we will say there are twelve leading zeros in the target, meaning the total of valid hashes is 16^52 (64-12=52). Therefore, the probability that a randomly picked hash is valid can be calculated as:
 
-## References 
+<img src="https://latex.codecogs.com/svg.image?16^{52}/16^{52}&space;=&space;16^{-12}&space;=&space;0.00000000000003%" title="16^{52}/16^{52} = 16^{-12} = 0.00000000000003%" />
+
+The above is the probability that any given Nonce value will generate a valid hash. From seeing the probability, I came to the conclusion that the difficulty of finding a hash digest beginning with twelve zeros is very high and it takes a great amount of computation to generate this value.
+
+## References & Research
 
 - [1] SHA-512 Explained: https://medium.com/@zaid960928/cryptography-explaining-sha-512-ad896365a0c1#:~:text=SHA%2D512%20is%20a%20hashing,digital%20certificates%20and%20even%20blockchains.
 
@@ -89,3 +95,5 @@ In conclusion it is realistically impossible to reverse the SHA-512 algorithm to
 - [7] Reversing SHA-512: https://crypto.stackexchange.com/questions/45377/why-cant-we-reverse-hashes#:~:text=Bit%20dependency%3A%20A%20hash%20algorithm,of%20the%20output%20hash%20separately.
 
 - [8] Avalanche Effect: https://www.wolfram.com/language/12/cryptography/demonstrate-the-avalanche-effect-of-a-hash-function.html
+
+- [9] Proof of Work: https://en.wikipedia.org/wiki/Proof_of_work#:~:text=Proof%20of%20work%20(PoW)%20is,minimal%20effort%20on%20their%20part.
