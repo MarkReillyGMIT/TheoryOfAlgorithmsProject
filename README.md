@@ -51,7 +51,7 @@ After every block goes through the message processing phase, we get the final 51
 The SHA-512 serves significant importance in providing security. The algorithm is commonly used for email address hashing, password hashing, and digital record verification. It is also used in blockchain technology.
 
 ## Questions and Answers:
-#### Why can't we reverse the SHA512 algorithm to retrieve the original message from a hash digest?
+###### Why can't we reverse the SHA512 algorithm to retrieve the original message from a hash digest?
 
 The SHA-512 algorithm is a hashing function which is a mathematical algorithm that maps data of arbitrary size (often called the "message") to a bit array of a fixed size (the "hash value", "hash", or "message digest") [4]. It cannot be reversed due to it being a one-way function - a one-way function is a function that is easy to compute on every input, but hard to invert given the image of a random input [5].
 
@@ -64,15 +64,15 @@ Two features that hashing algorithms use in making them non-reversible are: "The
 In conclusion it is realistically impossible to reverse the SHA-512 algorithm to retrieve the original message from the hash digest.
 
 
-#### Can you design an algorithm that, given enough time, will find input messages that give each of the possible 512-bit strings?
+###### Can you design an algorithm that, given enough time, will find input messages that give each of the possible 512-bit strings?
 
-#### How difficult is it to find a hash digest beginning with at least twelve zeros?
+###### How difficult is it to find a hash digest beginning with at least twelve zeros?
 
 There is an increase in difficulty with finding a hash digest beginning with twelve zeros, for every zero thats needed to be at the beginning of a hash digest the difficulty increases as well. The reason behind having twelve or more leading zeros is due to the concept ["Proof of Work"](https://en.wikipedia.org/wiki/Proof_of_work#:~:text=Proof%20of%20work%20(PoW)%20is,minimal%20effort%20on%20their%20part.). Proof of work (PoW) is a form of cryptographic zero-knowledge proof in which one party (the prover) proves to others (the verifiers) that a certain amount of computational effort has been expended for some purpose [9].
 
-Bitcoin is a very good example of proving that there is a high level of difficulty with having a number of leading zeros at the beginning of a hash digest. Bitcoin is a proof-of-work cryptocurrency that is based on the [Hashcash](https://en.wikipedia.org/wiki/Hashcash) PoW.Bitcoin use the SHA-256 hashing function to generate a 64-digit hexadecimal number. Blocks in the blockchain have another field which is called ["The Nonce"](https://www.investopedia.com/terms/n/nonce.asp#:~:text=A%20nonce%20is%20an%20abbreviation,blockchain%20miners%20are%20solving%20for.) which stands for number used only once. The Nonce is an integer number and along with the Block Number, Data and previous hash the Nonce serves as an input to the SHA-256 function to calculate the current block's hash. The nonce is designed to be totally under the user control providing the user with a mechanism to vary the current blocks hash without changing the data inside it.
+Bitcoin is a very good example of proving that there is a high level of difficulty with having a number of leading zeros at the beginning of a hash digest. Bitcoin is a proof-of-work cryptocurrency that is based on the [Hashcash](https://en.wikipedia.org/wiki/Hashcash) PoW.Bitcoin use the SHA-256 hashing function to generate a 64-digit hexadecimal number. Blocks in the blockchain have another field which is called ["The Nonce"](https://www.investopedia.com/terms/n/nonce.asp#:~:text=A%20nonce%20is%20an%20abbreviation,blockchain%20miners%20are%20solving%20for.) which stands for number used only once. The Nonce is an integer number and along with the Block Number, Data and previous hash the Nonce serves as an input to the SHA-256 function to calculate the current block's hash. The nonce is designed to be totally under the user control providing the user with a mechanism to vary the current blocks hash without changing the data inside it [10].
 
-With bitcoin there is a minimal target for a hash set every two weeks, anything above the target is rejected and anything below the target is accepted. The important part about the target is the amount of leading zeros which represent a fixed-size number that determines its magnitude. Every leading zero reduces the numbers magnitude by a factor of sixteen. For this example we will say there are twelve leading zeros in the target, meaning the total of valid hashes is 16^52 (64-12=52). Therefore, the probability that a randomly picked hash is valid can be calculated as:
+With bitcoin there is a minimal target for a hash set every two weeks, anything above the target is rejected and anything below the target is accepted. The important part about the target is the amount of leading zeros which represent a fixed-size number that determines its magnitude. Every leading zero reduces the numbers magnitude by a factor of sixteen. For this example we will say there are twelve leading zeros in the target, meaning the total of valid hashes is 16^52 (64-12=52). Therefore, the probability that a randomly picked hash is valid can be calculated as [10]:
 
 <img src="https://latex.codecogs.com/svg.image?16^{52}/16^{52}&space;=&space;16^{-12}&space;=&space;0.00000000000003%" title="16^{52}/16^{52} = 16^{-12} = 0.00000000000003%" />
 
@@ -97,3 +97,5 @@ The above is the probability that any given Nonce value will generate a valid ha
 - [8] Avalanche Effect: https://www.wolfram.com/language/12/cryptography/demonstrate-the-avalanche-effect-of-a-hash-function.html
 
 - [9] Proof of Work: https://en.wikipedia.org/wiki/Proof_of_work#:~:text=Proof%20of%20work%20(PoW)%20is,minimal%20effort%20on%20their%20part.
+
+- [10] Explaining Bitcoin: https://www.linkedin.com/pulse/how-does-bitcoin-blockchain-mining-work-kirill-eremenko/
